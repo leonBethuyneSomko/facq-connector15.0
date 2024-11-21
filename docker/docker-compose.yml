@@ -1,0 +1,35 @@
+version: '2.1'
+services:
+  db_prod:
+    image: postgres:9.4
+    restart: always
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+  odoo_prod:
+    build: prod
+    restart: always
+    links:
+      - db_prod:db
+    environment:
+      - SOMKOENV=PROD
+    volumes:
+      - ./prod/odoo.conf:/etc/odoo/odoo.conf
+      - ./prod/third:/mnt/repo/third
+      - ./prod/custom:/mnt/repo/custom
+    labels:
+      - "traefik.enable=true"
+      - "traefik.odoo.frontend.rule=Host:${KLANT}.somko.be,${PROD_DOMAINS-}"
+      - "traefik.odoo.port=8069"
+  proxy:
+    image: traefik
+    command: --web -c /etc/traefik/traefik.toml --LOGLEVEL=debug
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/etc/traefik/traefik.toml
+      - /acme
+

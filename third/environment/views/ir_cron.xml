@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="ir_cron_view" model="ir.ui.view">
+        <field name="name">ir.cron.error.mailer.form</field>
+        <field name="model">ir.cron</field>
+        <field name="inherit_id" ref="base.ir_cron_view_form"/>
+        <field name="arch" type="xml">
+            <field name="doall" position="after">
+                <field name="email_template_id"/>
+            </field>
+            <field name="active" position="after">
+                <field name="to_restore" readonly="1" groups="base.group_no_one"/>
+                <field name="required" groups="base.group_no_one"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

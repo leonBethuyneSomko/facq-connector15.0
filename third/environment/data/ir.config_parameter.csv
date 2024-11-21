@@ -1,0 +1,7 @@
+id,key,value
+mail_prod,prod.mail,1
+mail_test,test.mail,0
+mail_dev,dev.mail,0
+cron_prod,prod.cron,1
+cron_test,test.cron,0
+cron_dev,dev.cron,0

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='messaging']" position="after">
+                <group string="Debug Modus" name="impersonate_users" groups="base.group_no_one">
+                    <field name="debug_mode_enabled"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

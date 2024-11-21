@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="user_form_inherit_privileged_access" model="ir.ui.view">
+        <field name="name">User Form Inherit Privileged Access</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='messaging']" position="after">
+                <group string="Debug Mode" name="impersonate_users" groups="base.group_no_one">
+                    <field name="is_debug_mode_enabled" widget="boolean_toggle"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
